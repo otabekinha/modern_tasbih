@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:learn_bloc/components/restart_button.dart';
 import 'package:learn_bloc/state/counter_cubit.dart';
 
 class CounterView extends StatelessWidget {
@@ -12,7 +13,7 @@ class CounterView extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(
-          'Tasbih',
+          'Tasbeh',
           style: GoogleFonts.abel(
             textStyle: const TextStyle(
               fontSize: 26,
@@ -20,68 +21,7 @@ class CounterView extends StatelessWidget {
             ),
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              final shouldReset = await showDialog<bool>(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: Text(
-                    textAlign: TextAlign.center,
-                    'Are you sure you would like to reset?',
-                    style: GoogleFonts.abel(
-                      textStyle: const TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                  ),
-                  actions: [
-                    OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.grey.shade500,
-                      ),
-                      onPressed: () => Navigator.of(context).pop(false), // No
-                      child: Text(
-                        'No',
-                        style: GoogleFonts.abel(
-                          textStyle: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    OutlinedButton(
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.green,
-                      ),
-                      onPressed: () => Navigator.of(context).pop(true), // Yes
-                      child: Text(
-                        'Yes',
-                        style: GoogleFonts.abel(
-                          textStyle: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-
-              // Check the user response
-              if (shouldReset == true) {
-                // Update state via cubit
-                context.read<CounterCubit>().resetCounter();
-              }
-            },
-            icon: const Icon(
-              Icons.restart_alt,
-              color: Colors.white,
-            ),
-          ),
-        ],
+        actions: const [RestartIconButton()],
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
@@ -106,7 +46,7 @@ class CounterView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Tasbih Counter',
+                        'Tasbeh',
                         style: GoogleFonts.abel(
                           textStyle: const TextStyle(
                             fontSize: 26,
@@ -132,30 +72,6 @@ class CounterView extends StatelessWidget {
                             ),
                           );
                         },
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '/33',
-                            style: GoogleFonts.abel(
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w300,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 5),
-                          GestureDetector(
-                            onTap: () {},
-                            child: const Icon(
-                              Icons.border_color_outlined,
-                              size: 16,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
                       ),
                       const SizedBox(height: 50),
                       GestureDetector(

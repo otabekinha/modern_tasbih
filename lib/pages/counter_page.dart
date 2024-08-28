@@ -1,5 +1,3 @@
-// Counter Page: responsible for provding CounterCubit for CounterView
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:learn_bloc/state/counter_cubit.dart';
@@ -11,7 +9,7 @@ class CounterPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CounterCubit(0),
+      create: (context) => CounterCubit(),
       child: BlocListener<CounterCubit, int>(
         listener: (context, state) {
           if (state == 100) {
@@ -22,7 +20,6 @@ class CounterPage extends StatelessWidget {
               ),
             );
           }
-          
         },
         child: const CounterView(),
       ),
